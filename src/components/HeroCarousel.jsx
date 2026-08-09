@@ -12,7 +12,7 @@ export default function HeroCarousel() {
                 Inception
               </h1>
               <p className="fs-5 mb-4" style={{ color: 'var(--text-muted)', lineHeight: '1.6', fontWeight: '300' }}>
-                A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project.
+                A skilled thief uses dream-sharing to implant an idea in a CEO, but his haunted past threatens everything.
               </p>
               <div className="d-flex flex-column flex-sm-column flex-md-row gap-3">
                 <button className="btn btn-premium">Watch Trailer</button>
