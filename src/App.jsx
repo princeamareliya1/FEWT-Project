@@ -14,8 +14,6 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 
 import MovieDetails from "./pages/MovieDetails";
-import Movie1 from "./pages/Movie1";
-import Movie2 from "./pages/Movie2";
 import Movie3 from "./pages/Movie3";
 
 export default function App() {
@@ -29,8 +27,6 @@ export default function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/watchlist" element={<Watchlist />} />
           
-          <Route path="/movie/1" element={<Movie1 />} />
-          <Route path="/movie/2" element={<Movie2 />} />
           <Route path="/movie/3" element={<Movie3 />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
           

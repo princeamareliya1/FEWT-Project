@@ -62,8 +62,8 @@ body {
 }
 .navbar {
     background: rgba(6, 7, 13, 0.85) !important;
-    backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding: 15px 0;
     z-index: 1050;
@@ -102,21 +102,6 @@ body {
     transform: translateY(-2px);
     color: white;
 }
-.btn-outline-premium {
-    background: rgba(255, 255, 255, 0.03);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    font-weight: 600;
-    padding: 11px 30px;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    font-size: 0.95rem;
-}
-.btn-outline-premium:hover {
-    border-color: #ffffff;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-}
 .btn-outline-cyber {
     background: rgba(255, 255, 255, 0.03);
     color: white;
@@ -150,26 +135,13 @@ body {
     color: white;
     box-shadow: 0 5px 15px rgba(255, 0, 85, 0.4);
 }
-.btn-discover {
-    background: linear-gradient(135deg, var(--secondary-neon), #00a2ff);
-    color: #06070d;
-    font-weight: 700;
-    padding: 12px 30px;
-    border-radius: 12px;
-    border: none;
-    transition: all 0.3s ease;
-}
-.btn-discover:hover {
-    box-shadow: 0 8px 24px rgba(0, 240, 255, 0.4);
-    transform: translateY(-2px);
-    color: #06070d;
-}
 .movie-card {
     background: var(--card-bg);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 18px;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 .movie-card:hover {
@@ -211,6 +183,7 @@ body {
     top: 12px;
     right: 12px;
     background: rgba(6, 7, 13, 0.85);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     padding: 4px 10px;
     border-radius: 8px;
@@ -224,6 +197,7 @@ body {
     background: var(--card-bg);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 20px;
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     padding: 24px;
     height: 100%;
@@ -233,6 +207,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     padding: 30px;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     transition: border-color 0.3s ease;
@@ -244,6 +219,7 @@ body {
     background: var(--card-bg);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 24px;
+    -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
     padding: 40px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
@@ -259,6 +235,7 @@ body {
     border-radius: 14px;
     padding: 20px;
     text-align: center;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 .stat-value {
@@ -315,47 +292,6 @@ body {
     background-repeat: no-repeat;
 }
 
-.carousel-indicators {
-    bottom: 30px;
-    gap: 12px;
-    z-index: 15;
-}
-
-.carousel-indicators [data-bs-target] {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.3);
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-}
-
-.carousel-indicators .active {
-    background-color: var(--secondary-neon);
-    box-shadow: 0 0 10px var(--secondary-neon);
-    transform: scale(1.2);
-}
-
-/* --- 8. SCROLL CONTAINERS & LISTS --- */
-.horizontal-scroll-container {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-top: 12px;
-    margin-top: -12px;
-    padding-bottom: 20px;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-
-.horizontal-scroll-container::-webkit-scrollbar,
-.custom-scroll::-webkit-scrollbar { 
-    height: 6px; 
-    width: 4px; 
-}
-
-.horizontal-scroll-container::-webkit-scrollbar-track,
 .custom-scroll::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.02);
     border-radius: 10px;
@@ -529,6 +465,7 @@ body {
     border-radius: 16px;
     padding: 15px 25px;
     font-size: 1.1rem;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -652,7 +589,7 @@ a.auth-link:hover { text-shadow: 0 0 8px var(--secondary-neon); }
 
 /* --- 12. MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-    .btn-premium, .btn-outline-premium { width: 100%; }
+    .btn-premium { width: 100%; }
     .display-2 { font-size: 2.6rem !important; font-weight: 800; }
     .fs-5 { font-size: 1rem !important; }
     .section-title { font-size: 1.4rem; }

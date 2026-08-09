@@ -18,7 +18,7 @@ export default function Footer() {
               Get exclusive updates on upcoming blockbusters and trending cast releases directly to your inbox.
             </p>
             <div className="d-flex flex-column gap-1 small">
-              <span style={{ color: 'var(--text-muted)' }}>📍 Darshan University Campus, Rajkot, Gujarat</span>
+              <span style={{ color: 'var(--text-muted)' }}>📍Rajkot, Gujarat</span>
               <span style={{ color: 'var(--text-muted)' }}>✉️ contact@cinemaxstudio.com</span>
             </div>
           </div>
