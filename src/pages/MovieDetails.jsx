@@ -56,15 +56,13 @@ export default function MovieDetails() {
             </div>
 
             <ScrollSection>
-              <Link to="/star/1" className="text-decoration-none">
-                <div className="cast-item">
-                  <div className="cast-avatar-wrapper">
-                    <img src="https://m.media-amazon.com/images/M/MV5BMTk2NjY2NzY0N15BMl5BanBnXkFtZTcwNDQ4NjYzNA@@._V1_.jpg" alt="Robert Downey Jr." />
-                  </div>
-                  <h6 className="fw-bold mb-1 text-truncate text-white">Robert Downey Jr.</h6>
-                  <p className="small mb-0" style={{ color: 'var(--text-muted)' }}>Lewis Strauss</p>
+              <div className="cast-item">
+                <div className="cast-avatar-wrapper">
+                  <img src="https://m.media-amazon.com/images/M/MV5BMTk2NjY2NzY0N15BMl5BanBnXkFtZTcwNDQ4NjYzNA@@._V1_.jpg" alt="Robert Downey Jr." />
                 </div>
-              </Link>
+                <h6 className="fw-bold mb-1 text-truncate text-white">Robert Downey Jr.</h6>
+                <p className="small mb-0" style={{ color: 'var(--text-muted)' }}>Lewis Strauss</p>
+              </div>
 
               <div className="cast-item">
                 <div className="cast-avatar-wrapper">

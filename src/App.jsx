@@ -18,11 +18,6 @@ import Movie1 from "./pages/Movie1";
 import Movie2 from "./pages/Movie2";
 import Movie3 from "./pages/Movie3";
 
-import Star1 from "./pages/Star1";
-import Star2 from "./pages/Star2";
-import Star3 from "./pages/Star3";
-import Star4 from "./pages/Star4";
-
 export default function App() {
   return (
     <div className="d-flex flex-column min-vh-100 text-white" style={{ backgroundColor: 'var(--bg-dark)' }}>
@@ -46,11 +41,6 @@ export default function App() {
           
           <Route path="/setting" element={<Setting />} />
           <Route path="/settings" element={<Setting />} />
-          
-          <Route path="/star/1" element={<Star1 />} />
-          <Route path="/star/2" element={<Star2 />} />
-          <Route path="/star/3" element={<Star3 />} />
-          <Route path="/star/4" element={<Star4 />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
