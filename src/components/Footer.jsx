@@ -29,7 +29,7 @@ export default function Footer() {
             <ul className="list-unstyled footer-links mb-0">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/search">Search</Link></li>
-              <li><Link to="/search">About Us</Link></li>
+              <li><Link to="/about">About Us</Link></li>
             </ul>
           </div>
 
@@ -39,7 +39,7 @@ export default function Footer() {
             <ul className="list-unstyled footer-links mb-0">
               <li><Link to="/profile">Profile</Link></li>
               <li><Link to="/watchlist">Watchlist</Link></li>
-              <li><Link to="/login">Sign In</Link></li>
+              <li><Link to="/login">Login</Link></li>
             </ul>
           </div>
 
