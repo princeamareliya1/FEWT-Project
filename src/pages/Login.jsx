@@ -1,9 +1,16 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Login() {
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = originalOverflow; };
+  }, []);
+
   return (
-    <div className="container auth-container" style={{ paddingTop: '100px', minHeight: '80vh' }}>
-      <div className="row justify-content-center">
+    <div className="auth-wrapper d-flex align-items-start justify-content-center" style={{ minHeight: '100vh', height: '100vh', overflow: 'hidden', padding: '60px 16px 0' }}>
+      <div className="row justify-content-center w-100">
         <div className="col-xl-5 col-lg-6 col-md-8 col-sm-10">
           <div className="auth-card">
             <div className="text-center mb-4">
@@ -11,7 +18,7 @@ export default function Login() {
               <p className="small" style={{ color: 'var(--text-muted)' }}>Access your Cyber Cinematic portal</p>
             </div>
 
-            <form onSubmit={(e) => e.preventDefault()}>
+            <form>
               <div className="mb-3">
                 <label htmlFor="loginEmail" className="form-label">Email Address</label>
                 <input 

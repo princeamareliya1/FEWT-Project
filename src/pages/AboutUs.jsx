@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import BentoGrid from '../components/BentoGrid';
-import FaqAccordion from '../components/FaqAccordion';
 
 export default function AboutUs() {
   return (
@@ -10,10 +9,10 @@ export default function AboutUs() {
         <div className="container px-4 py-5">
           <span className="cyber-badge mb-3 d-inline-block">OUR MANIFESTO</span>
           <h1 className="display-3 fw-bold text-white mb-4">
-            Where Storytelling Meets Pure Telemetry.
+            Movies made easy and quick.
           </h1>
           <p className="fs-5 fw-light mx-auto text-secondary" style={{ maxWidth: '720px', lineHeight: 1.8 }}>
-            We built CINEMA X Studio on a simple premise: discovering film should feel as captivating as watching it. No clunky menus, no slow load times—just seamless movie discovery built for cinephiles.
+            CINEMA X Studio helps you find movies fast. Simple pages, clear results, and no clutter.
           </p>
         </div>
       </header>
@@ -43,19 +42,6 @@ export default function AboutUs() {
                 </div>
               </div>
             </div>
-
-            <div className="cyber-card p-4 p-md-5 mb-5">
-              <div className="d-flex align-items-center justify-content-between mb-3">
-                <span className="cyber-badge">ACADEMIC PROJECT</span>
-                <span className="small text-secondary">2026 Edition</span>
-              </div>
-              <h4 className="fw-bold text-white mb-3">Darshan University Engineering</h4>
-              <p className="text-secondary lh-lg mb-0">
-                This web platform was architected under the web design frameworks of <strong>Darshan University</strong>. It showcases production-ready implementations of modern flex/grid layouts, micro-interactions, and responsive front-end design standards.
-              </p>
-            </div>
-
-            <FaqAccordion />
           </div>
         </div>
       </main>

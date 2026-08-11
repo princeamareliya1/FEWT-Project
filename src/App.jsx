@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -17,6 +17,8 @@ import MovieDetails from "./pages/MovieDetails";
 import Movie3 from "./pages/Movie3";
 
 export default function App() {
+  const location = useLocation();
+
   return (
     <div className="d-flex flex-column min-vh-100 text-white" style={{ backgroundColor: 'var(--bg-dark)' }}>
       <Navbar />
@@ -43,7 +45,7 @@ export default function App() {
         </Routes>
       </main>
 
-      <Footer />
+      {location.pathname !== '/login' && <Footer />}
     </div>
   );
 }
