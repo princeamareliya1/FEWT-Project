@@ -12,6 +12,13 @@ export default function Navbar() {
           <NavLink className={({ isActive }) => `nav-link px-2 ${isActive ? 'active' : ''}`} to="/about">About Us</NavLink>
           <NavLink className={({ isActive }) => `nav-link px-2 ${isActive ? 'active' : ''}`} to="/profile">Profile</NavLink>
           <Link 
+            className="btn btn-outline-light px-3 py-1.5 fs-6 ms-2" 
+            to="/signup" 
+            style={{ fontSize: '0.9rem', padding: '6px 16px', borderRadius: '8px' }}
+          >
+            Sign Up
+          </Link>
+          <Link 
             className="btn btn-premium px-3 py-1.5 fs-6 ms-2" 
             to="/login" 
             style={{ fontSize: '0.9rem', padding: '6px 16px', borderRadius: '8px' }}

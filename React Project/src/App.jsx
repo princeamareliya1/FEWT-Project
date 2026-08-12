@@ -7,7 +7,6 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import Watchlist from "./pages/Watchlist";
 import Profile from "./pages/Profile";
-import Setting from "./pages/Setting";
 import AboutUs from "./pages/AboutUs";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -36,15 +35,12 @@ export default function App() {
           
           <Route path="/profile" element={<Profile />} />
           
-          <Route path="/setting" element={<Setting />} />
-          <Route path="/settings" element={<Setting />} />
-
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
       </main>
 
-      {location.pathname !== '/login' && <Footer />}
+      {location.pathname !== '/login' && location.pathname !== '/signup' && <Footer />}
     </div>
   );
 }
