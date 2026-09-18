@@ -307,6 +307,16 @@ body {
     background: var(--secondary-neon); 
 }
 
+.horizontal-scroll-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 20px;
+    padding-bottom: 15px;
+}
+
 .horizontal-scroll-container .scroll-item {
     flex: 0 0 auto;
     width: 280px;
