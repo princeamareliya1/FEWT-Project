@@ -12,7 +12,7 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 
 import MovieDetails from "./pages/MovieDetails";
-import Movie3 from "./pages/Movie3";
+
 
 export default function App() {
   const location = useLocation();
@@ -26,8 +26,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/watchlist" element={<Watchlist />} />
-          
-          <Route path="/movie/3" element={<Movie3 />} />
+
           <Route path="/movie/:id" element={<MovieDetails />} />
           
           <Route path="/about" element={<AboutUs />} />
