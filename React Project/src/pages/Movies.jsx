@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import ScrollSection from '../components/ScrollSection';
 
-export default function Movie3() {
+export default function Movies() {
   return (
     <div style={{ paddingTop: '60px' }}>
       <div 
