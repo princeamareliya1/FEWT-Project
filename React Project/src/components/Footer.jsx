@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
+
 export default function Footer() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
   return (
     <footer className="site-footer pb-3">
       <div className="container-fluid px-md-5 px-4">

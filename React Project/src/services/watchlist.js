@@ -3,7 +3,17 @@ const WATCHLIST_KEY = 'cinema_x_watchlist';
 export function getWatchlist() {
   const saved = localStorage.getItem(WATCHLIST_KEY);
 
-  return saved ? JSON.parse(saved) : [];
+  if (!saved) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(saved);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    localStorage.removeItem(WATCHLIST_KEY);
+    return [];
+  }
 }
 
 export function addToWatchlist(movie) {

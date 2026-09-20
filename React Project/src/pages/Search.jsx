@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import MovieCard from '../components/MovieCard';
 import { searchMovies } from '../services/tmdb';
 
 export default function Search() {
@@ -13,9 +13,6 @@ export default function Search() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // =========================
-  // SEARCH MOVIES
-  // =========================
   const handleSearch = async (e, searchPage = 1) => {
     e?.preventDefault();
 
@@ -32,8 +29,6 @@ export default function Search() {
     try {
       const data = await searchMovies(query, searchPage);
 
-      console.log('SEARCH RESULTS:', data);
-
       setMovies(data.results || []);
       setPage(data.page || searchPage);
       setTotalPages(data.total_pages || 0);
@@ -44,9 +39,7 @@ export default function Search() {
         behavior: 'smooth'
       });
 
-    } catch (error) {
-      console.error('SEARCH ERROR:', error);
-
+    } catch {
       setError('Failed to search movies.');
       setMovies([]);
     } finally {
@@ -54,18 +47,12 @@ export default function Search() {
     }
   };
 
-  // =========================
-  // NEXT PAGE
-  // =========================
   const handleNextPage = () => {
     if (page < totalPages) {
       handleSearch(null, page + 1);
     }
   };
 
-  // =========================
-  // PREVIOUS PAGE
-  // =========================
   const handlePreviousPage = () => {
     if (page > 1) {
       handleSearch(null, page - 1);
@@ -75,9 +62,6 @@ export default function Search() {
   return (
     <div>
 
-      {/* =========================
-          SEARCH BOX
-      ========================= */}
       <div
         className="container px-4 my-5"
         style={{ paddingTop: '60px' }}
@@ -128,9 +112,6 @@ export default function Search() {
 
       </div>
 
-      {/* =========================
-          SEARCH RESULTS
-      ========================= */}
       <div className="container-fluid px-md-5 px-4 my-5">
 
         <div className="d-flex align-items-center justify-content-between mb-4">
@@ -150,9 +131,6 @@ export default function Search() {
 
         </div>
 
-        {/* =========================
-            LOADING
-        ========================= */}
         {loading && (
           <div className="text-center py-5">
 
@@ -163,9 +141,6 @@ export default function Search() {
           </div>
         )}
 
-        {/* =========================
-            ERROR
-        ========================= */}
         {!loading && error && (
           <div className="text-center py-5 text-danger">
 
@@ -174,9 +149,6 @@ export default function Search() {
           </div>
         )}
 
-        {/* =========================
-            NO RESULTS
-        ========================= */}
         {!loading &&
           !error &&
           query &&
@@ -195,100 +167,24 @@ export default function Search() {
             </div>
           )}
 
-        {/* =========================
-            MOVIE RESULTS
-        ========================= */}
         {!loading && movies.length > 0 && (
 
           <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-4">
 
             {movies.map((movie) => (
-
-              <div
-                className="col"
-                key={movie.id}
-              >
-
-                <Link
-                  to={`/movie/${movie.id}`}
-                  className="text-decoration-none"
-                >
-
-                  <div className="card movie-card text-white h-100">
-
-                    {/* POSTER */}
-                    <div className="card-img-wrapper position-relative">
-
-                      {/* RATING */}
-                      <div className="card-rating">
-                        ★ {movie.vote_average?.toFixed(1) || 'N/A'}
-                      </div>
-
-                      {movie.poster_path ? (
-
-                        <img
-                          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                          alt={movie.title}
-                        />
-
-                      ) : (
-
-                        <div
-                          className="d-flex align-items-center justify-content-center"
-                          style={{ height: '100%' }}
-                        >
-                          <span className="text-secondary">
-                            No Image
-                          </span>
-                        </div>
-
-                      )}
-
-                    </div>
-
-                    {/* MOVIE INFO */}
-                    <div className="card-body p-3">
-
-                      <h5
-                        className="card-title text-truncate fw-bold m-0"
-                        style={{ fontSize: '1.05rem' }}
-                      >
-                        {movie.title}
-                      </h5>
-
-                      <p
-                        className="card-text small mt-2 mb-0"
-                        style={{
-                          color: 'var(--text-muted)'
-                        }}
-                      >
-                        {movie.release_date
-                          ? movie.release_date.slice(0, 4)
-                          : 'N/A'}
-                      </p>
-
-                    </div>
-
-                  </div>
-
-                </Link>
-
+              <div className="col" key={movie.id}>
+                <MovieCard movie={movie} />
               </div>
-
             ))}
 
           </div>
 
         )}
 
-        {/* =========================
-            PAGINATION
-        ========================= */}
         {!loading && movies.length > 0 && totalPages > 1 && (
 
           <div className="d-flex justify-content-center align-items-center gap-3 mt-5">
 
-            {/* PREVIOUS */}
             <button
               className="btn btn-outline-cyber"
               onClick={handlePreviousPage}
@@ -297,12 +193,10 @@ export default function Search() {
               ← Previous
             </button>
 
-            {/* PAGE NUMBER */}
             <span className="text-white fw-semibold">
               Page {page} of {Math.min(totalPages, 500)}
             </span>
 
-            {/* NEXT */}
             <button
               className="btn btn-premium"
               onClick={handleNextPage}

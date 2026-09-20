@@ -16,49 +16,46 @@ export default function MovieDetails() {
 
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
-  const [trailer, setTrailer] = useState(null);
-  const [isInWatchlist, setIsWatchlist] = useState(false);
-
-  const [loading, setLoading] = useState(true);
+  const [trailerState, setTrailerState] = useState({
+    movieId: null,
+    trailer: null
+  });
   const [error, setError] = useState('');
+  const [errorMovieId, setErrorMovieId] = useState(null);
+  const [, setWatchlistVersion] = useState(0);
 
-  // =========================
-  // GET MOVIE DETAILS + CAST
-  // =========================
   useEffect(() => {
-    setLoading(true);
-    setError('');
+    let isActive = true;
 
     Promise.all([
       getMovieDetails(id),
       getMovieCredits(id)
     ])
       .then(([movieData, creditsData]) => {
-        console.log('MOVIE DETAILS:', movieData);
-        console.log('MOVIE CREDITS:', creditsData);
+        if (!isActive) {
+          return;
+        }
 
         setMovie(movieData);
         setCast(creditsData.cast?.slice(0, 10) || []);
       })
-      .catch((error) => {
-        console.error('MOVIE ERROR:', error);
-        setError('Failed to load movie details.');
-      })
-      .finally(() => {
-        setLoading(false);
+      .catch(() => {
+        if (isActive) {
+          setError('Failed to load movie details.');
+          setErrorMovieId(id);
+        }
       });
+
+    return () => {
+      isActive = false;
+    };
   }, [id]);
 
-  // =========================
-  // GET TRAILER
-  // =========================
   useEffect(() => {
-    setTrailer(null);
+    let isActive = true;
 
     getMovieVideos(id)
       .then((videosData) => {
-        console.log('MOVIE VIDEOS:', videosData);
-
         const trailerVideo =
           videosData.results?.find(
             (video) =>
@@ -70,33 +67,33 @@ export default function MovieDetails() {
               video.site === 'YouTube'
           );
 
-        console.log('SELECTED TRAILER:', trailerVideo);
-
-        setTrailer(trailerVideo || null);
+        if (isActive) {
+          setTrailerState({
+            movieId: id,
+            trailer: trailerVideo || null
+          });
+        }
       })
-      .catch((error) => {
-        console.error('TRAILER ERROR:', error);
-        setTrailer(null);
+      .catch(() => {
+        if (isActive) {
+          setTrailerState({ movieId: id, trailer: null });
+        }
       });
+
+    return () => {
+      isActive = false;
+    };
   }, [id]);
 
-  // =========================
-  // CHECK WATCHLIST
-  // =========================
-  useEffect(() => {
-    const savedMovies = getWatchlist();
+  const trailer = trailerState.movieId === id
+    ? trailerState.trailer
+    : null;
+  const isInWatchlist = getWatchlist().some(
+    (item) => item.id === Number(id)
+  );
+  const loading = !movie || movie.id !== Number(id);
 
-    const alreadySaved = savedMovies.some(
-      (item) => item.id === Number(id)
-    );
-
-    setIsWatchlist(alreadySaved);
-  }, [id]);
-
-  // =========================
-  // ERROR
-  // =========================
-  if (error) {
+  if (error && errorMovieId === id) {
     return (
       <div
         className="text-center text-danger"
@@ -107,9 +104,6 @@ export default function MovieDetails() {
     );
   }
 
-  // =========================
-  // LOADING
-  // =========================
   if (loading || !movie) {
     return (
       <div
@@ -121,9 +115,6 @@ export default function MovieDetails() {
     );
   }
 
-  // =========================
-  // IMAGE URLS
-  // =========================
   const backdrop = movie.backdrop_path
     ? `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
     : '';
@@ -132,9 +123,6 @@ export default function MovieDetails() {
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     : '';
 
-  // =========================
-  // RUNTIME
-  // =========================
   const runtimeHours = movie.runtime
     ? Math.floor(movie.runtime / 60)
     : 0;
@@ -143,26 +131,21 @@ export default function MovieDetails() {
     ? movie.runtime % 60
     : 0;
 
-  // =========================
-  // WATCHLIST HANDLER
-  // =========================
   const handleWatchlist = () => {
     if (isInWatchlist) {
       return;
     }
 
     addToWatchlist(movie);
-    setIsWatchlist(true);
+    setWatchlistVersion((version) => version + 1);
   };
 
-  // =========================
-  // TRAILER HANDLER
-  // =========================
   const handleTrailer = () => {
     if (trailer) {
       window.open(
         `https://www.youtube.com/watch?v=${trailer.key}`,
-        '_blank'
+        '_blank',
+        'noopener,noreferrer'
       );
     } else {
       alert('Trailer not available.');
@@ -172,9 +155,6 @@ export default function MovieDetails() {
   return (
     <div style={{ paddingTop: '60px' }}>
 
-      {/* =========================
-          HERO
-      ========================= */}
       <div
         className="hero-banner position-relative"
         style={{
@@ -197,7 +177,6 @@ export default function MovieDetails() {
 
             <div className="row g-4 align-items-end">
 
-              {/* POSTER */}
               <div className="col-auto d-none d-md-block">
 
                 {poster && (
@@ -215,7 +194,6 @@ export default function MovieDetails() {
 
               </div>
 
-              {/* BASIC DETAILS */}
               <div className="col">
 
                 <div className="d-flex align-items-center gap-2 mb-2">
@@ -246,7 +224,6 @@ export default function MovieDetails() {
 
                 <div className="d-flex gap-3 flex-wrap">
 
-                  {/* PLAY TRAILER */}
                   <button
                     className="btn btn-premium px-4"
                     onClick={handleTrailer}
@@ -254,7 +231,6 @@ export default function MovieDetails() {
                     ▶ Play Trailer
                   </button>
 
-                  {/* WATCHLIST */}
                   <button
                     className="btn btn-outline-cyber px-4"
                     onClick={handleWatchlist}
@@ -275,19 +251,12 @@ export default function MovieDetails() {
         </div>
       </div>
 
-      {/* =========================
-          CONTENT
-      ========================= */}
       <div className="container-fluid px-md-5 px-4 my-5">
 
         <div className="row g-4">
 
-          {/* =========================
-              LEFT
-          ========================= */}
           <div className="col-lg-8">
 
-            {/* SYNOPSIS */}
             <div className="cyber-card mb-4">
 
               <h4 className="fw-bold text-white mb-3">
@@ -300,7 +269,6 @@ export default function MovieDetails() {
 
             </div>
 
-            {/* CAST */}
             <div className="d-flex align-items-center justify-content-between mb-4">
 
               <h3 className="section-title m-0">
@@ -362,9 +330,6 @@ export default function MovieDetails() {
 
           </div>
 
-          {/* =========================
-              RIGHT
-          ========================= */}
           <div className="col-lg-4">
 
             <div className="cyber-card">
@@ -375,7 +340,6 @@ export default function MovieDetails() {
 
               <ul className="list-unstyled d-flex flex-column gap-3 mb-0">
 
-                {/* RELEASE DATE */}
                 <li className="d-flex justify-content-between border-bottom border-secondary border-opacity-25 pb-2">
 
                   <span className="text-secondary">
@@ -388,7 +352,6 @@ export default function MovieDetails() {
 
                 </li>
 
-                {/* LANGUAGE */}
                 <li className="d-flex justify-content-between border-bottom border-secondary border-opacity-25 pb-2">
 
                   <span className="text-secondary">
@@ -401,7 +364,6 @@ export default function MovieDetails() {
 
                 </li>
 
-                {/* RATING */}
                 <li className="d-flex justify-content-between border-bottom border-secondary border-opacity-25 pb-2">
 
                   <span className="text-secondary">
@@ -419,7 +381,6 @@ export default function MovieDetails() {
 
                 </li>
 
-                {/* VOTES */}
                 <li className="d-flex justify-content-between">
 
                   <span className="text-secondary">
